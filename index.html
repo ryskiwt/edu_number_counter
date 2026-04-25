@@ -13,10 +13,15 @@
       </header>
 
       <section class="number-stage" aria-live="polite">
+        <div id="digitCountControls" class="digit-count-host"></div>
         <div id="numberDisplay" class="number-display" aria-label="0">0</div>
         <div class="primary-controls">
           <button id="autoButton" class="control-button primary" type="button">
-            スタート
+            <span
+              class="control-button-icon control-button-icon-play"
+              aria-hidden="true"
+            ></span>
+            <span>スタート</span>
           </button>
         </div>
       </section>
@@ -26,18 +31,27 @@
           <div class="settings-top-row">
             <div class="setting-row">
               <span class="setting-label">よみあげ</span>
-              <label class="speech-toggle">
-                <input
-                  id="speechToggle"
-                  class="speech-input"
-                  type="checkbox"
-                  aria-label="よみあげ"
-                />
-                <span class="speech-switch" aria-hidden="true">
-                  <span id="speechState" class="speech-state">OFF</span>
-                  <span class="speech-knob"></span>
-                </span>
-              </label>
+              <div class="speech-mode-options" role="radiogroup" aria-label="よみあげ">
+                <label class="speech-mode-option">
+                  <input
+                    class="speech-mode-input"
+                    type="radio"
+                    name="speechMode"
+                    value="off"
+                    checked
+                  />
+                  <span class="speech-mode-option-label">OFF</span>
+                </label>
+                <label class="speech-mode-option">
+                  <input
+                    class="speech-mode-input"
+                    type="radio"
+                    name="speechMode"
+                    value="on"
+                  />
+                  <span class="speech-mode-option-label">ON</span>
+                </label>
+              </div>
             </div>
             <div class="setting-row setting-row-rate">
               <span class="setting-label">はやさ</span>
@@ -82,41 +96,127 @@
               </div>
             </div>
           </div>
-          <div class="setting-row">
-            <span class="setting-label">よみかた</span>
-            <div class="reading-settings" role="group" aria-label="よみかた">
-              <label class="reading-choice">
-                <span class="reading-choice-text reading-choice-default">よん</span>
-                <input class="reading-choice-input" type="checkbox" data-reading-key="4" />
-                <span class="reading-choice-switch" aria-hidden="true">
-                  <span class="reading-choice-knob"></span>
-                </span>
-                <span class="reading-choice-text reading-choice-alt">し</span>
-              </label>
-              <label class="reading-choice">
-                <span class="reading-choice-text reading-choice-default">なな</span>
-                <input class="reading-choice-input" type="checkbox" data-reading-key="7" />
-                <span class="reading-choice-switch" aria-hidden="true">
-                  <span class="reading-choice-knob"></span>
-                </span>
-                <span class="reading-choice-text reading-choice-alt">しち</span>
-              </label>
-              <label class="reading-choice">
-                <span class="reading-choice-text reading-choice-default">きゅう</span>
-                <input class="reading-choice-input" type="checkbox" data-reading-key="9" />
-                <span class="reading-choice-switch" aria-hidden="true">
-                  <span class="reading-choice-knob"></span>
-                </span>
-                <span class="reading-choice-text reading-choice-alt">く</span>
-              </label>
-              <label class="reading-choice">
-                <span class="reading-choice-text reading-choice-default">ぜろ</span>
-                <input class="reading-choice-input" type="checkbox" data-reading-key="0" />
-                <span class="reading-choice-switch" aria-hidden="true">
-                  <span class="reading-choice-knob"></span>
-                </span>
-                <span class="reading-choice-text reading-choice-alt">れい</span>
-              </label>
+          <div class="settings-bottom-row">
+            <div class="setting-row">
+              <span class="setting-label">ことば</span>
+              <div class="language-options" role="radiogroup" aria-label="ことば">
+                <label class="language-option">
+                  <input
+                    class="language-input"
+                    type="radio"
+                    name="displayLanguage"
+                    value="ja"
+                    checked
+                  />
+                  <span class="language-option-label">にほんご</span>
+                </label>
+                <label class="language-option">
+                  <input
+                    class="language-input"
+                    type="radio"
+                    name="displayLanguage"
+                    value="en"
+                  />
+                  <span class="language-option-label">English</span>
+                </label>
+              </div>
+            </div>
+            <div class="setting-row">
+              <span class="setting-label">よみかた</span>
+              <div class="reading-settings" role="group" aria-label="よみかた">
+                <div class="reading-choice" role="radiogroup" aria-label="4のよみかた">
+                  <label class="reading-choice-option">
+                    <input
+                      class="reading-choice-input"
+                      type="radio"
+                      name="readingChoice4"
+                      data-reading-key="4"
+                      value="0"
+                      checked
+                    />
+                    <span class="reading-choice-option-label">よん</span>
+                  </label>
+                  <label class="reading-choice-option">
+                    <input
+                      class="reading-choice-input"
+                      type="radio"
+                      name="readingChoice4"
+                      data-reading-key="4"
+                      value="1"
+                    />
+                    <span class="reading-choice-option-label">し</span>
+                  </label>
+                </div>
+                <div class="reading-choice" role="radiogroup" aria-label="7のよみかた">
+                  <label class="reading-choice-option">
+                    <input
+                      class="reading-choice-input"
+                      type="radio"
+                      name="readingChoice7"
+                      data-reading-key="7"
+                      value="0"
+                      checked
+                    />
+                    <span class="reading-choice-option-label">なな</span>
+                  </label>
+                  <label class="reading-choice-option">
+                    <input
+                      class="reading-choice-input"
+                      type="radio"
+                      name="readingChoice7"
+                      data-reading-key="7"
+                      value="1"
+                    />
+                    <span class="reading-choice-option-label">しち</span>
+                  </label>
+                </div>
+                <div class="reading-choice" role="radiogroup" aria-label="9のよみかた">
+                  <label class="reading-choice-option">
+                    <input
+                      class="reading-choice-input"
+                      type="radio"
+                      name="readingChoice9"
+                      data-reading-key="9"
+                      value="0"
+                      checked
+                    />
+                    <span class="reading-choice-option-label">きゅう</span>
+                  </label>
+                  <label class="reading-choice-option">
+                    <input
+                      class="reading-choice-input"
+                      type="radio"
+                      name="readingChoice9"
+                      data-reading-key="9"
+                      value="1"
+                    />
+                    <span class="reading-choice-option-label">く</span>
+                  </label>
+                </div>
+                <div class="reading-choice" role="radiogroup" aria-label="0のよみかた">
+                  <label class="reading-choice-option">
+                    <input
+                      class="reading-choice-input"
+                      type="radio"
+                      name="readingChoice0"
+                      data-reading-key="0"
+                      value="0"
+                      checked
+                    />
+                    <span class="reading-choice-option-label">ぜろ</span>
+                  </label>
+                  <label class="reading-choice-option">
+                    <input
+                      class="reading-choice-input"
+                      type="radio"
+                      name="readingChoice0"
+                      data-reading-key="0"
+                      value="1"
+                    />
+                    <span class="reading-choice-option-label">れい</span>
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </section>
