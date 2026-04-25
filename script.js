@@ -19,7 +19,9 @@ const autoBreathDelaysByRate = new Map([
   [1.4, 300],
   [1.75, 120],
 ]);
-const DEFAULT_SPEECH_RATE = speechRateValues[0] ?? 0.8;
+const DEFAULT_SPEECH_RATE = speechRateValues.includes(1.15)
+  ? 1.15
+  : (speechRateValues[0] ?? 0.8);
 const MIN_COUNT = 0n;
 const MAX_COUNT = 9999999999999n;
 
@@ -53,8 +55,17 @@ const readingChoices = {
   7: ["なな", "しち"],
   9: ["きゅう", "く"],
 };
+const defaultReadingPreferenceIndexes = {
+  0: 0,
+  4: 1,
+  7: 1,
+  9: 0,
+};
 const readingPreferenceIndexes = Object.fromEntries(
-  Object.keys(readingChoices).map((key) => [key, 0]),
+  Object.keys(readingChoices).map((key) => [
+    key,
+    defaultReadingPreferenceIndexes[key] ?? 0,
+  ]),
 );
 const largeUnitReadings = ["", "まん", "おく", "ちょう"];
 const zeroKanji = "零";
@@ -207,13 +218,14 @@ function loadReadingPreferences() {
     );
 
     Object.keys(readingPreferenceIndexes).forEach((key) => {
-      readingPreferenceIndexes[key] = normalizeReadingPreferenceIndex(
-        Number(savedPreferences[key]),
-      );
+      readingPreferenceIndexes[key] =
+        key in savedPreferences
+          ? normalizeReadingPreferenceIndex(Number(savedPreferences[key]))
+          : (defaultReadingPreferenceIndexes[key] ?? 0);
     });
   } catch {
     Object.keys(readingPreferenceIndexes).forEach((key) => {
-      readingPreferenceIndexes[key] = 0;
+      readingPreferenceIndexes[key] = defaultReadingPreferenceIndexes[key] ?? 0;
     });
   }
 }
@@ -324,10 +336,8 @@ function getPlaceReadingParts(digit, place) {
       return { count: "", unit: "じゅう", kanjiCount: "", kanjiUnit: "十" };
     }
 
-    const usePreference = digit === 4 || digit === 7;
-
     return {
-      count: getOnesReading(digit, { usePreference }),
+      count: getOnesReading(digit, { usePreference: false }),
       unit: "じゅう",
       kanjiCount: kanjiDigits[digit],
       kanjiUnit: "十",
