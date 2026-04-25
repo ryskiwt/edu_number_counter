@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>かずをおぼえよう</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app" aria-labelledby="app-title">
+      <header class="topbar">
+        <h1 id="app-title">かずをおぼえよう</h1>
+      </header>
+
+      <section class="number-stage" aria-live="polite">
+        <div id="numberDisplay" class="number-display" aria-label="0">0</div>
+        <div class="primary-controls">
+          <button id="autoButton" class="control-button primary" type="button">
+            スタート
+          </button>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="操作">
+        <section class="settings-panel" aria-label="設定">
+          <div class="settings-top-row">
+            <div class="setting-row">
+              <span class="setting-label">よみあげ</span>
+              <label class="speech-toggle">
+                <input
+                  id="speechToggle"
+                  class="speech-input"
+                  type="checkbox"
+                  aria-label="よみあげ"
+                />
+                <span class="speech-switch" aria-hidden="true">
+                  <span id="speechState" class="speech-state">OFF</span>
+                  <span class="speech-knob"></span>
+                </span>
+              </label>
+            </div>
+            <div class="setting-row setting-row-rate">
+              <span class="setting-label">はやさ</span>
+              <div class="speech-rate-options" role="radiogroup" aria-label="はやさ">
+                <label class="speech-rate-option">
+                  <input
+                    class="speech-rate-input"
+                    type="radio"
+                    name="speechRate"
+                    value="0.8"
+                    checked
+                  />
+                  <span class="speech-rate-option-label">とてもゆっくり</span>
+                </label>
+                <label class="speech-rate-option">
+                  <input
+                    class="speech-rate-input"
+                    type="radio"
+                    name="speechRate"
+                    value="1.15"
+                  />
+                  <span class="speech-rate-option-label">ゆっくり</span>
+                </label>
+                <label class="speech-rate-option">
+                  <input
+                    class="speech-rate-input"
+                    type="radio"
+                    name="speechRate"
+                    value="1.4"
+                  />
+                  <span class="speech-rate-option-label">はやい</span>
+                </label>
+                <label class="speech-rate-option">
+                  <input
+                    class="speech-rate-input"
+                    type="radio"
+                    name="speechRate"
+                    value="1.75"
+                  />
+                  <span class="speech-rate-option-label">とてもはやい</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">よみかた</span>
+            <div class="reading-settings" role="group" aria-label="よみかた">
+              <label class="reading-choice">
+                <span class="reading-choice-text reading-choice-default">よん</span>
+                <input class="reading-choice-input" type="checkbox" data-reading-key="4" />
+                <span class="reading-choice-switch" aria-hidden="true">
+                  <span class="reading-choice-knob"></span>
+                </span>
+                <span class="reading-choice-text reading-choice-alt">し</span>
+              </label>
+              <label class="reading-choice">
+                <span class="reading-choice-text reading-choice-default">なな</span>
+                <input class="reading-choice-input" type="checkbox" data-reading-key="7" />
+                <span class="reading-choice-switch" aria-hidden="true">
+                  <span class="reading-choice-knob"></span>
+                </span>
+                <span class="reading-choice-text reading-choice-alt">しち</span>
+              </label>
+              <label class="reading-choice">
+                <span class="reading-choice-text reading-choice-default">きゅう</span>
+                <input class="reading-choice-input" type="checkbox" data-reading-key="9" />
+                <span class="reading-choice-switch" aria-hidden="true">
+                  <span class="reading-choice-knob"></span>
+                </span>
+                <span class="reading-choice-text reading-choice-alt">く</span>
+              </label>
+              <label class="reading-choice">
+                <span class="reading-choice-text reading-choice-default">ぜろ</span>
+                <input class="reading-choice-input" type="checkbox" data-reading-key="0" />
+                <span class="reading-choice-switch" aria-hidden="true">
+                  <span class="reading-choice-knob"></span>
+                </span>
+                <span class="reading-choice-text reading-choice-alt">れい</span>
+              </label>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
